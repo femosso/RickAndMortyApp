@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+  h2:
+    console:
+      enabled: true
+
+
+rick-and-morty-api:
+  url: https://rickandmortyapi.com/api/
