@@ -1,20 +1,8 @@
-<div class="card my-5">
-    <div class="card-body">
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Gender</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let character of characters">
-            <td>{{ character.id }}</td>
-            <td>{{ character.name }}</td>
-            <td>{{ character.gender }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="row">
+  <div class="col-md-5">
+      <app-character-list></app-character-list>
   </div>
+  <div class="col-md-7">
+      <router-outlet></router-outlet>
+  </div>
+</div>

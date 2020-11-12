@@ -21,7 +21,7 @@ public class CharacterController {
         return characterService.getCharacters();
     }
 
-    @PostMapping("/users")
+    @PutMapping("/characters")
     public void addCharacter(@RequestBody Character character) {
         this.characterService.save(character);
     }

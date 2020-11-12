@@ -30,6 +30,7 @@ public class CharacterService {
     }
 
     public void save(Character character) {
+        character.setEditable(true);
         this.characterRepository.save(character);
     }
 
