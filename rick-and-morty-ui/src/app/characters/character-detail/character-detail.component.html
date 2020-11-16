@@ -1,9 +1,38 @@
-<div class="row">
-    <div class="col-xs-12">
-        <img 
-            src="{{ character.image }}"
-            alt="{{ character.name }}"
-            class="img-responsive"
-            style="max-height: 300px;">
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-10">
+            <h4 class="list-group-item-heading">{{ character.name }}</h4>
+        </div>
+        <div class="col-2">
+            <fa-icon [icon]="gender"></fa-icon>
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-between">
+        <div class="col-10">
+            <h6>Status</h6>
+        </div>
+        <div class="col-2">
+            {{ character.status }}
+        </div>
+    </div>
+    <div class="row justify-content-between">
+        <div class="col-10">
+            <h6>Specie</h6>
+        </div>
+        <div class="col-2">
+            {{ character.species }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <img src="{{ character.image }}" alt="{{ character.name }}" class="img-responsive"
+                style="max-height: 300px;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button type="button" class="btn btn-primary my-3" [disabled]="!character.editable">Edit</button>
+        </div>
     </div>
 </div>

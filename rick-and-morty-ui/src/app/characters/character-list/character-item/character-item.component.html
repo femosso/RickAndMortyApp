@@ -3,14 +3,10 @@
     [routerLink]="[index]"
     routerLinkActive="active"
     class="list-group-item clearfix">
-    <div class="pull-left">
         <h6 class="list-group-item-heading">{{ character.name }}</h6>
-    </div>
-    <span class="pull-right">
         <img 
             [src]="character.image"
             alt="{{ character.name }}"
             class="img-responsive"
             style="max-height: 50px;">
-    </span>
 </a>

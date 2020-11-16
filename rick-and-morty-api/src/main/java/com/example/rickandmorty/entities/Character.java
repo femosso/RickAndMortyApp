@@ -23,6 +23,8 @@ public class Character {
     private String name;
     private String gender;
     private String image;
+    private String species;
+    private String status;
     private boolean editable;
 
 }

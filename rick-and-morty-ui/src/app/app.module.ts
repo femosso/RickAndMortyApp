@@ -12,6 +12,7 @@ import { CharacterService } from './characters/character.service';
 import { CharacterFormComponent } from './characters/character-form/character-form.component';
 import { CharacterListComponent } from './characters/character-list/character-list.component';
 import { CharacterItemComponent } from './characters/character-list/character-item/character-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CharacterItemComponent } from './characters/character-list/character-it
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]

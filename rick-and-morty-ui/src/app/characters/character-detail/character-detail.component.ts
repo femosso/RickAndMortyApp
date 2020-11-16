@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { faQuestionCircle, faFemale, faGenderless, faMale, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Character } from '../character.model';
 import { CharacterService } from '../character.service';
 
@@ -11,6 +12,7 @@ import { CharacterService } from '../character.service';
 export class CharacterDetailComponent implements OnInit {
   character: Character;
   id: number;
+  gender: IconDefinition;
 
   constructor(private characterService: CharacterService,
     private route: ActivatedRoute,
@@ -22,7 +24,25 @@ export class CharacterDetailComponent implements OnInit {
       (params: Params) => {
         this.id = +params['id'];
         this.character = this.characterService.getCharacter(this.id);
+        this.selectGenderIcon(this.character.gender);
       }
     )
+  }
+
+  private selectGenderIcon(genderString: string) {
+    switch (genderString) {
+      case "Male":
+        this.gender = faMale;
+        break;
+      case "Female":
+        this.gender = faFemale;
+        break;
+      case "Genderless":
+        this.gender = faGenderless;
+        break;
+      default:
+        this.gender = faQuestionCircle;
+        break;
+    }
   }
 }
