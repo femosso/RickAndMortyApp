@@ -14,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'new', component: CharacterFormComponent },
       { path: ':id', component: CharacterDetailComponent, resolve: [CharactersResolverService] },
+      { path: ':id/edit', component: CharacterFormComponent, resolve: [CharactersResolverService] },
     ]
   }
 ];

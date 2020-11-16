@@ -29,6 +29,15 @@ export class CharacterDetailComponent implements OnInit {
     )
   }
 
+  onEditCharacter() {
+    this.router.navigate(['edit'], { relativeTo: this.route })
+  }
+
+  onDeleteCharacter() {
+    this.characterService.deleteCharacter(this.id);
+    this.router.navigate(['/characters']);
+  }
+
   private selectGenderIcon(genderString: string) {
     switch (genderString) {
       case "Male":

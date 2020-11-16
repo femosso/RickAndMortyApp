@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CharacterService } from '../character.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { CharacterService } from '../character.service';
   styleUrls: ['./character-form.component.css']
 })
 export class CharacterFormComponent implements OnInit {
+  id: number;
+  editMode = false;
   characterForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
@@ -16,11 +18,21 @@ export class CharacterFormComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.initForm();
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.editMode = params['id'] != null;
+        this.initForm();
+      }
+    )
   }
 
   onSubmit() {
-    this.characterService.save(this.characterForm.value);
+    if (this.editMode) {
+      this.characterService.updateCharacter(this.id, this.characterForm.value);
+    } else {
+      this.characterService.addCharacter(this.characterForm.value);
+    }
     this.onCancel();
   }
 
@@ -32,11 +44,24 @@ export class CharacterFormComponent implements OnInit {
     let characterName = '';
     let characterImage = '';
     let characterGender = '';
+    let characterSpecies = '';
+    let characterStatus = '';
+
+    if (this.editMode) {
+      const character = this.characterService.getCharacter(this.id);
+      characterName = character.name;
+      characterImage = character.image;
+      characterGender = character.gender;
+      characterSpecies = character.species;
+      characterStatus = character.status;
+    }
 
     this.characterForm = new FormGroup({
       'name': new FormControl(characterName, Validators.required),
       'image': new FormControl(characterImage, Validators.required),
-      'gender': new FormControl(characterGender, Validators.required)
+      'gender': new FormControl(characterGender, Validators.required),
+      'species': new FormControl(characterSpecies, Validators.required),
+      'status': new FormControl(characterStatus, Validators.required)
     });
   }
 }

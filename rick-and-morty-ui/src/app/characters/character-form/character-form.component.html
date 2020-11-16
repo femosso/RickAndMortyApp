@@ -1,43 +1,64 @@
-<div class="row">
-    <div class="col-xs-12">
-        <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" formControlName="name" class="form-control">
-                    </div>
+<div class="container">
+    <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" formControlName="name" class="form-control">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="genger">Gender</label>
-                        <input type="text" id="gender" formControlName="gender" class="form-control">
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender" formControlName="gender">
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Genderless</option>
+                        <option>unknown</option>
+                    </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="image">Image URL</label>
-                        <input type="text" id="image" formControlName="image" class="form-control" #image>
-                    </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" formControlName="status">
+                        <option>Alive</option>
+                        <option>Dead</option>
+                        <option>unknown</option>
+                    </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <img [src]="image.value" class="img-responsive" style="max-height: 150px;">
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="species">Specie</label>
+                    <input type="text" id="species" formControlName="species" class="form-control">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success" [disabled]="!characterForm.valid">Save</button>
-                    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="image">Image URL</label>
+                    <input type="text" id="image" formControlName="image" class="form-control" #image>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <img [src]="image.value" class="img-responsive" style="max-height: 150px;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-success" [disabled]="!characterForm.valid">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+    </form>
 </div>

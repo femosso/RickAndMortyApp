@@ -32,7 +32,8 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <button type="button" class="btn btn-primary my-3" [disabled]="!character.editable">Edit</button>
+            <button type="button" class="btn btn-primary my-3" [disabled]="!character.editable" (click)="onEditCharacter()">Edit</button>
+            <button type="button" class="btn btn-danger my-3" [disabled]="!character.editable" (click)="onDeleteCharacter()">Delete</button>
         </div>
     </div>
 </div>
