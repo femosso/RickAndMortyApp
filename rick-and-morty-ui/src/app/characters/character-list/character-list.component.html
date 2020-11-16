@@ -5,23 +5,10 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <div class="card my-5">
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Gender</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let character of characters; let i = index" (click)="onSelected(i)">
-                            <td>{{ character.name }}</td>
-                            <td>{{ character.gender }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="card my-3 scrollable">
+            <app-character-item *ngFor="let characterItem of characters; let i = index" [character]="characterItem"
+                [index]="i">
+            </app-character-item>
         </div>
     </div>
 </div>

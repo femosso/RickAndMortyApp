@@ -11,6 +11,7 @@ import { CharacterDetailComponent } from './characters/character-detail/characte
 import { CharacterService } from './characters/character.service';
 import { CharacterFormComponent } from './characters/character-form/character-form.component';
 import { CharacterListComponent } from './characters/character-list/character-list.component';
+import { CharacterItemComponent } from './characters/character-list/character-item/character-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CharacterListComponent } from './characters/character-list/character-li
     CharactersComponent,
     CharacterDetailComponent,
     CharacterFormComponent,
-    CharacterListComponent
+    CharacterListComponent,
+    CharacterItemComponent
   ],
   imports: [
     BrowserModule,

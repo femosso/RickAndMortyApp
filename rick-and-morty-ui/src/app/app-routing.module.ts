@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: 'characters',
     component: CharactersComponent,
+    resolve: [CharactersResolverService],
     children: [
       { path: 'new', component: CharacterFormComponent },
       { path: ':id', component: CharacterDetailComponent, resolve: [CharactersResolverService] },

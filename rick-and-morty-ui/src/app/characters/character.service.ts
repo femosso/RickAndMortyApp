@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 import { Character } from './character.model';
 
@@ -14,18 +13,6 @@ export class CharacterService {
 
   constructor(private http: HttpClient) {
     this.charactersUrl = 'http://localhost:8080/characters';
-  }
-
-  public findAll(): Observable<Character[]> {
-    return this.http
-      .get<Character[]>(
-        this.charactersUrl
-      )
-      .pipe(
-        tap(characters => {
-          this.characters = characters;
-        })
-      );
   }
 
   public save(character: Character) {
@@ -52,5 +39,4 @@ export class CharacterService {
     this.characters = characters;
     this.charactersChanged.next(this.characters.slice());
   }
-
 }
