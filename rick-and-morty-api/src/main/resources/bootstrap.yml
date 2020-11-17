@@ -1,0 +1,10 @@
+server:
+  port: 8081
+  servlet:
+    contextPath: /
+  ssl:
+    enabled: false
+
+spring:
+  application:
+    name: rick-and-morty-api

@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 import { Character } from './character.model';
-import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class CharacterService {
   charactersChanged = new Subject<Character[]>();
   private characters: Character[] = [];
-  private charactersUrl: string;
 
-  constructor(private http: HttpClient) {
-    this.charactersUrl = 'http://localhost:8080/characters/';
-  }
+  constructor(private http: HttpClient) {}
 
   addCharacter(character: Character) {
     character.editable = true;
@@ -54,7 +52,7 @@ export class CharacterService {
   storeCharacter(character: Character) {
     return this.http
       .put<Character>(
-        this.charactersUrl,
+        environment.apiUrl,
         character
       )
       .subscribe(response => {
@@ -65,7 +63,7 @@ export class CharacterService {
   fetchCharacters() {
     return this.http
       .get<Character[]>(
-        this.charactersUrl
+        environment.apiUrl
       )
       .pipe(
         tap(characters => {
@@ -77,7 +75,7 @@ export class CharacterService {
   deleteCharacter(characterId: string) {
     return this.http
       .delete<Character>(
-        this.charactersUrl + characterId
+        environment.apiUrl + characterId
       )
       .subscribe(response => {
         console.log(response);

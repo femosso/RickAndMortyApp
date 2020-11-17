@@ -1,0 +1,11 @@
+version: '3'
+services:
+  rick-and-morty-api:
+    build:
+      context: rick-and-morty-api
+      dockerfile: Dockerfile
+    container_name: rick-and-morty-api
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 8081:8081
