@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 import { Character } from './character.model';
@@ -12,7 +12,7 @@ export class CharacterService {
   private charactersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.charactersUrl = 'http://localhost:8080/characters';
+    this.charactersUrl = 'http://localhost:8080/characters/';
   }
 
   addCharacter(character: Character) {
@@ -44,8 +44,11 @@ export class CharacterService {
     this.charactersChanged.next(this.characters.slice());
   }
 
-  deleteCharacter(index: number) {
-
+  removeCharacter(index: number) {
+    let characterId = this.characters[index].id;
+    this.characters.splice(index, 1);
+    this.charactersChanged.next(this.characters.slice());
+    this.deleteCharacter(characterId);
   }
 
   storeCharacter(character: Character) {
@@ -69,5 +72,15 @@ export class CharacterService {
           this.setCharacters(characters);
         })
       );
+  }
+
+  deleteCharacter(characterId: string) {
+    return this.http
+      .delete<Character>(
+        this.charactersUrl + characterId
+      )
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 }

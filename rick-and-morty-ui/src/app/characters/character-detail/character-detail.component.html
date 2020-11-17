@@ -32,8 +32,16 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <button type="button" class="btn btn-primary my-3" [disabled]="!character.editable" (click)="onEditCharacter()">Edit</button>
-            <button type="button" class="btn btn-danger my-3" [disabled]="!character.editable" (click)="onDeleteCharacter()">Delete</button>
+            <button type="button" class="btn btn-primary my-3" [disabled]="!character.editable"
+                (click)="onEditCharacter()">Edit</button>
+            &nbsp;
+            <button type="button" class="btn btn-danger my-3" [disabled]="!character.editable"
+                (click)="onDeleteCharacter()">Delete</button>
+        </div>
+    </div>
+    <div class="row" *ngIf="!character.editable">
+        <div class="col-12">
+            <span style="color:red"><i>Characters from dataset cannot be modified.</i></span>
         </div>
     </div>
 </div>

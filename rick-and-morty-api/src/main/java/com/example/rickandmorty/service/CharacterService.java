@@ -34,6 +34,10 @@ public class CharacterService {
         this.characterRepository.save(character);
     }
 
+    public void delete(Integer characterId) {
+        this.characterRepository.deleteById(characterId);
+    }
+
     private List<Character> retrieveDataFromRemote() {
         List<Character> characterList = new ArrayList<>();
 

@@ -25,4 +25,9 @@ public class CharacterController {
     public void addCharacter(@RequestBody Character character) {
         this.characterService.save(character);
     }
+
+    @DeleteMapping("/characters/{characterId}")
+    public void deleteCharacter(@PathVariable Integer characterId) {
+        this.characterService.delete(characterId);
+    }
 }
