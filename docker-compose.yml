@@ -1,6 +1,7 @@
 version: '3'
 services:
   rick-and-morty-api:
+    image: rick-and-morty-api
     build:
       context: rick-and-morty-api
       dockerfile: Dockerfile
@@ -9,3 +10,11 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - 8081:8081
+  rick-and-morty-ui:
+    image: rick-and-morty-ui
+    build:
+      context: rick-and-morty-ui
+      dockerfile: Dockerfile
+    container_name: rick-and-morty-ui
+    ports:
+      - 8080:80

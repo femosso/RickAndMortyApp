@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // TODO - check if this will be necessary when running inside containers
+@CrossOrigin(origins = "http://rick-and-morty-ui:8080")
 public class CharacterController {
 
     private CharacterService characterService;

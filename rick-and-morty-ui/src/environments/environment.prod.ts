@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/characters/'
+  apiUrl: 'http://rick-and-morty-api:8081/characters/'
 };
