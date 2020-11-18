@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://rick-and-morty-ui:8080")
+@CrossOrigin(origins = {"http://rick-and-morty-ui:8080", "http://localhost:4200"})
 public class CharacterController {
 
     private CharacterService characterService;
