@@ -1,7 +1,10 @@
 package com.example.rickandmorty.controller;
 
 import com.example.rickandmorty.entities.Character;
+import com.example.rickandmorty.payload.CharacterDto;
 import com.example.rickandmorty.service.CharacterService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,17 +20,23 @@ public class CharacterController {
     }
 
     @GetMapping("/characters")
-    public List<Character> getCharacters() {
-        return characterService.getCharacters();
+    public ResponseEntity<List<CharacterDto>> getCharacters() {
+        return ResponseEntity.status(HttpStatus.OK).body(characterService.getCharacters());
     }
 
     @PutMapping("/characters")
-    public void addCharacter(@RequestBody Character character) {
-        this.characterService.save(character);
+    public ResponseEntity addCharacter(@RequestBody Character character) {
+        HttpStatus status = this.characterService.save(character) ?
+                HttpStatus.CREATED :
+                HttpStatus.INTERNAL_SERVER_ERROR;
+        return ResponseEntity.status(status).build();
     }
 
     @DeleteMapping("/characters/{characterId}")
-    public void deleteCharacter(@PathVariable Integer characterId) {
-        this.characterService.delete(characterId);
+    public ResponseEntity deleteCharacter(@PathVariable Integer characterId) {
+        HttpStatus status = this.characterService.delete(characterId) ?
+                HttpStatus.OK :
+                HttpStatus.INTERNAL_SERVER_ERROR;
+        return ResponseEntity.status(status).build();
     }
 }

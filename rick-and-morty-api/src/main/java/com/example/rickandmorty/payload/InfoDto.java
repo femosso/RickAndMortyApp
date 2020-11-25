@@ -1,9 +1,9 @@
-package com.example.rickandmorty.dto;
+package com.example.rickandmorty.payload;
 
 import lombok.Data;
 
 @Data
-class Info {
+class InfoDto {
 
     private int count;
     private int pages;

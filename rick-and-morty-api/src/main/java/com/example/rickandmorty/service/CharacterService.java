@@ -1,8 +1,10 @@
 package com.example.rickandmorty.service;
 
 import com.example.rickandmorty.entities.Character;
-import com.example.rickandmorty.dto.CharacterList;
+import com.example.rickandmorty.payload.CharacterDto;
+import com.example.rickandmorty.payload.CharacterListDto;
 import com.example.rickandmorty.repository.CharacterRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,33 +20,42 @@ public class CharacterService {
 
     private WebClient webClient;
 
-    public CharacterService(CharacterRepository characterRepository, WebClient webClient) {
+    private ModelMapper modelMapper;
+
+    public CharacterService(CharacterRepository characterRepository, WebClient webClient, ModelMapper modelMapper) {
         this.characterRepository = characterRepository;
         this.webClient = webClient;
+        this.modelMapper = modelMapper;
     }
 
-    public List<Character> getCharacters() {
-        List<Character> results = retrieveDataFromRemote();
-        this.characterRepository.findAll().forEach(results::add);
+    public List<CharacterDto> getCharacters() {
+        List<CharacterDto> results = retrieveDataFromRemote();
+        this.characterRepository.findAll().forEach(character -> results.add(convertToDto(character)));
         return results;
     }
 
-    public void save(Character character) {
+    public boolean save(Character character) {
         character.setEditable(true);
-        this.characterRepository.save(character);
+        Character result = this.characterRepository.save(character);
+        return this.characterRepository.findById(result.getId()).isPresent();
     }
 
-    public void delete(Integer characterId) {
+    public boolean delete(Integer characterId) {
         this.characterRepository.deleteById(characterId);
+        return this.characterRepository.findById(characterId).isEmpty();
     }
 
-    private List<Character> retrieveDataFromRemote() {
-        List<Character> characterList = new ArrayList<>();
+    private CharacterDto convertToDto(Character character) {
+        return modelMapper.map(character, CharacterDto.class);
+    }
 
-        ResponseEntity<CharacterList> response = webClient.get()
+    private List<CharacterDto> retrieveDataFromRemote() {
+        List<CharacterDto> characterList = new ArrayList<>();
+
+        ResponseEntity<CharacterListDto> response = webClient.get()
                 .uri("character")
                 .retrieve()
-                .toEntity(CharacterList.class)
+                .toEntity(CharacterListDto.class)
                 .block();
 
         if (response != null && response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
