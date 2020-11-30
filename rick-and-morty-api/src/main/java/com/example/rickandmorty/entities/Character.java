@@ -15,8 +15,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Character {
 
-    // TODO - create DTO class for this
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

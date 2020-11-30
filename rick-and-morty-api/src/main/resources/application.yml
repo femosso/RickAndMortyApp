@@ -6,4 +6,4 @@ spring:
       enabled: true
 
 rick-and-morty-api:
-  url: https://rickandmortyapi.com/api/
+  url: https://rickandmortyapi.com/api

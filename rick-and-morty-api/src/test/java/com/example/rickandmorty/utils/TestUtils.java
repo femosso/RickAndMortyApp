@@ -3,6 +3,9 @@ package com.example.rickandmorty.utils;
 import com.example.rickandmorty.entities.Character;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import okhttp3.mockwebserver.MockResponse;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -10,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestUtils {
 
@@ -58,6 +62,21 @@ public class TestUtils {
                 randomAlphaNumeric(7),  /* status */
                 true                    /* editable */
         );
+    }
+
+    public static MockResponse createMockResponse(Object body, HttpStatus httpStatus) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(mapper.writeValueAsString(body))
+                .setResponseCode(httpStatus.value());
+    }
+
+    public static <S, T> List<T> mapList(ModelMapper modelMapper, List<S> source, Class<T> targetClass) {
+        return source
+                .stream()
+                .map(element -> modelMapper.map(element, targetClass))
+                .collect(Collectors.toList());
     }
 
     private static String randomAlphaNumeric(int count) {

@@ -44,7 +44,7 @@ class CharacterControllerTest {
 
     @BeforeEach
     void init() {
-        characterDtoList = mapList(TestUtils.buildRandomCharacterList(10), CharacterDto.class);
+        characterDtoList = TestUtils.mapList(modelMapper, TestUtils.buildRandomCharacterList(10), CharacterDto.class);
         Character randomCharacter = TestUtils.generateRandomCharacter(0);
         characterDto = modelMapper.map(randomCharacter, CharacterDto.class);
 
@@ -98,12 +98,5 @@ class CharacterControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isInternalServerError())
                 .andReturn();
-    }
-
-    <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
-        return source
-                .stream()
-                .map(element -> modelMapper.map(element, targetClass))
-                .collect(Collectors.toList());
     }
 }

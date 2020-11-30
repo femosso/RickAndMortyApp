@@ -53,7 +53,7 @@ public class CharacterService {
         List<CharacterDto> characterList = new ArrayList<>();
 
         ResponseEntity<CharacterListDto> response = webClient.get()
-                .uri("character")
+                .uri("/character")
                 .retrieve()
                 .toEntity(CharacterListDto.class)
                 .block();
